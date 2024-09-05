@@ -6,10 +6,16 @@ namespace WebsiteGeneratorOOP
     {
         static void Main(string[] args)
         {
-            ClassSpecificHtml("Klassen", 4);
-        }
+            WebsiteGenerator myWebsite = new WebsiteGenerator();
 
-        static void OutputHtml()
+            myWebsite.ClassSpecificHtml("Klass1", "Välkomna hit!");
+        }
+    }
+
+    class WebsiteGenerator
+    {
+
+        public void OutputHtml()
         {
             Console.WriteLine("<!DOCTYPE html>");
             Console.WriteLine("<html>");
@@ -23,7 +29,7 @@ namespace WebsiteGeneratorOOP
             Console.WriteLine("</html>");
         }
 
-        static void ClassSpecificHtml(string klassnamn, string klassmeddelande)
+        public void ClassSpecificHtml(string klassnamn, string klassmeddelande)
         {
             Console.WriteLine("<!DOCTYPE html>");
             Console.WriteLine("<html>");
@@ -38,13 +44,13 @@ namespace WebsiteGeneratorOOP
             Console.WriteLine("</html>");
         }
 
-        static void ClassSpecificHtml(string klassnamn, int antal)
+        public void ClassSpecificHtml(string klassnamn, int antal)
         {
             Console.WriteLine("<!DOCTYPE html>");
             Console.WriteLine("<html>");
             Console.WriteLine("<body>");
             Console.WriteLine($"<h1>Välkomna {klassnamn}!</h1>");
-            
+
             for (int i = 0; i < antal; i++)
             {
                 Console.Write($"Meddelande {i}: ");
