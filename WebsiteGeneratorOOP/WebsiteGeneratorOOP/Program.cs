@@ -8,21 +8,27 @@ namespace WebsiteGeneratorOOP
         {
             WebsiteGenerator myWebsite = new WebsiteGenerator();
 
-            //myWebsite.ClassSpecificHtml("Klass1", "Välkomna hit!");
-            string ogHtml = myWebsite.OutputHtml();
-            Console.WriteLine(ogHtml);
+            myWebsite.ClassSpecificHtml("Klass1", 4);
+            //string ogHtml = myWebsite.OutputHtml();
+            //Console.WriteLine(ogHtml);
         }
     }
 
     class WebsiteGenerator
     {
-        public string[] html = { "<!DOCTYPE html>", "<html>", "<body>", "<h1>Välkomna!</h1>", "<main>", "<p>Kurs om C#</p>", "<p>Kurs om Databaser</p>", "</main>", "</body>", "</html>" };
+        private string[] _html = { "<!DOCTYPE html>", "<html>", "<body>", "<h1>Välkomna!</h1>", "<main>", "<p>Kurs om C#</p>", "<p>Kurs om Databaser</p>", "</main>", "</body>", "</html>" };
+
+        public string[] Html
+        {
+            get { return _html; }
+            set { _html = value; }
+        }
 
 
         public string OutputHtml()
         {
             string fullHtml = "";
-            foreach (string s in html)
+            foreach (string s in Html)
             {
                 fullHtml += $"{s}\n";
             }
