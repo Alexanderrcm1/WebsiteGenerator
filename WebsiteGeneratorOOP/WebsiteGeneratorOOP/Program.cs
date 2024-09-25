@@ -13,7 +13,7 @@ namespace WebsiteGeneratorOOP
             //Console.WriteLine(ogHtml);
         }
     }
-
+    
     class WebsiteGenerator
     {
         private string[] _html = { "<!DOCTYPE html>", "<html>", "<body>", "<h1>Välkomna!</h1>", "<main>", "<p>Kurs om C#</p>", "<p>Kurs om Databaser</p>", "</main>", "</body>", "</html>" };
