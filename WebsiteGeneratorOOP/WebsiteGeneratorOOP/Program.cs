@@ -1,4 +1,5 @@
 ﻿using System.IO.Enumeration;
+using System.Transactions;
 using System.Xml;
 
 namespace WebsiteGeneratorOOP
@@ -11,12 +12,28 @@ namespace WebsiteGeneratorOOP
             string fileName = "test.txt";
 
             string[] html = { "<!DOCTYPE html>", "<html>", "<body>", "<h1>Välkomna!</h1>", "<main>", "<p>Kurs om C#</p>", "<p>Kurs om Databaser</p>", "</main>", "</body>", "</html>" };
-            WebsiteGenerator myWebsite = new WebsiteGenerator();
-            ConsoleDisplayer displayer = new ConsoleDisplayer();
-            FileMaker filemaker = new FileMaker(path, fileName);
-            string standardHtml = myWebsite.GetStandardHtml(html);
 
-            filemaker.Output(standardHtml);
+            menu();
+            int choice = getMenuChoice();
+            IUser? user = null;
+
+            switch(choice)
+            {
+                case 1:
+                    user = new ConsoleDisplayer();
+                    break;
+                case 2:
+                    user = new FileMaker(path, fileName);
+                    break;
+                case 3:
+                    Environment.Exit(0);
+                    break;
+            }
+
+
+            WebsiteGenerator myWebsite = new WebsiteGenerator();
+            string standardHtml = myWebsite.GetStandardHtml(html);
+            user?.Output(standardHtml);
 
             //string classSpecificHtml = myWebsite.GetClassSpecificHtml(html, "Klass 1", "Välkommna hit!");
             //string classSpecificHtml2 = myWebsite.GetClassSpecificHtml(html, "Klass 1", 4);
@@ -30,6 +47,36 @@ namespace WebsiteGeneratorOOP
             //Console.WriteLine(ogHtml);
 
             //Console.WriteLine(myWebsite.GetHtml(html));
+        }
+
+        static void menu()
+        {
+            string[] menuString = { "=====MENU=====", "1. Print html to console.", "2. Save html on file.", "3. Exit." };
+
+            foreach (string item in menuString)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        static int getMenuChoice()
+        {
+            while(true)
+            if (int.TryParse(Console.ReadLine() , out int choice))
+            {
+                    if (choice > 0 && choice < 4)
+                    {
+                        return choice;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Enter a number between 1 - 3\nTry again");
+                    }
+            }
+            else
+            {
+                Console.WriteLine("You have to enter a number!\nTry again");
+            }
         }
     }
     interface IUser
