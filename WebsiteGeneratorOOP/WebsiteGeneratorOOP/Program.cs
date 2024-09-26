@@ -8,6 +8,12 @@ namespace WebsiteGeneratorOOP
     {
         static void Main(string[] args)
         {
+            WebsiteGenerator myWebsite = new WebsiteGenerator();
+
+            Getters get = new Getters();
+
+            string myHtml = "";
+
             string path = "C:\\Users\\acarl\\Desktop\\ITHS\\Programmering C#\\Övningsuppgifter\\WebsiteGenerator\\WebsiteGeneratorOOP\\WebsiteGeneratorOOP";
             string fileName = "test.txt";
 
@@ -30,23 +36,46 @@ namespace WebsiteGeneratorOOP
                     break;
             }
 
+            htmlMenu();
+            choice = getMenuChoice();
 
-            WebsiteGenerator myWebsite = new WebsiteGenerator();
-            string standardHtml = myWebsite.GetStandardHtml(html);
-            user?.Output(standardHtml);
+            switch(choice)
+            {
+                case 1:
+                    myHtml = myWebsite.GetStandardHtml(html);
+                    user?.Output(myHtml);
+                    break;
+                case 2:
+                    Console.Write("Enter classname: ");
+                    string className = get.getString();
+                    Console.Write("Enter class message: ");
+                    string classMessage = get.getString();
 
-            //string classSpecificHtml = myWebsite.GetClassSpecificHtml(html, "Klass 1", "Välkommna hit!");
-            //string classSpecificHtml2 = myWebsite.GetClassSpecificHtml(html, "Klass 1", 4);
-            //Console.WriteLine(standardHtml);
+                    myHtml = myWebsite.GetClassSpecificHtml(html, className, classMessage);
+                    user?.Output(myHtml);
+                    break;
+                case 3:
+                    Console.Write("Enter classname: ");
+                    className = get.getString();
+                    Console.Write("Enter total messages: ");
+                    int totalMessages = get.getInt();
 
-            //displayer.Output(classSpecificHtml2);
+                    myHtml = myWebsite.GetClassSpecificHtml(html, className, totalMessages);
+                    user?.Output(myHtml);
+                    break;
+            }
+        }
 
-            //Console.WriteLine(myWebsite.GetClassSpecificHtml(html, "Klass1", 4));
+        static void htmlMenu()
+        {
+            Console.Clear();
+            string[] menuString = { "=====MENU=====", "1. Standard html.", "2. Class specific html.", "3. Class specific html (1+ messages)" };
 
-            //string ogHtml = myWebsite.OutputHtml();
-            //Console.WriteLine(ogHtml);
+            foreach (string item in menuString)
+            {
+                Console.WriteLine(item);
+            }
 
-            //Console.WriteLine(myWebsite.GetHtml(html));
         }
 
         static void menu()
@@ -192,6 +221,36 @@ namespace WebsiteGeneratorOOP
 
             }
             return fullHtml;
+        }
+    }
+
+    class Getters
+    {
+        public int getInt()
+        {
+            while(true)
+            {
+                if (int.TryParse(Console.ReadLine(), out int value))
+                {
+                    if (value > 0)
+                    {
+                        return value;
+                    }
+                    else
+                    {
+                        Console.WriteLine("You have to enter a number greater than 0");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("You have to enter a number\nTry again");
+                }
+            }
+        }
+
+        public string getString()
+        {
+            return Console.ReadLine() ?? "";
         }
     }
 }

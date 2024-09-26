@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <body>
-<h1>Välkomna!</h1>
+<h1>Välkomna Klass 1!</h1>
+<p><b>Meddelande:</b> Hej.</p>
+<p><b>Meddelande:</b> Då.</p>
+<p><b>Meddelande:</b> man.</p>
 <main>
 <p>Kurs om C#</p>
 <p>Kurs om Databaser</p>
